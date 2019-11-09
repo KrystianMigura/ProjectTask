@@ -7,18 +7,40 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
+     
     class fileOptions
     {
+        string fileName = "configurationDB.dat";
+
         public fileOptions() { }
 
         public bool tryOpenFile()
         {
-               
-            string sourceDirectory = @"C:\Users\"+Environment.UserName+@"\Documents\DBconfiguration.txt";
-            bool checkFile = File.Exists(sourceDirectory);
-
-            return (checkFile == true) ? true : false;
-
+            
+            try
+            {
+                using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                {
+                    try
+                    {
+                        using (BinaryReader r = new BinaryReader(fs))
+                        {
+                            Console.WriteLine("File Open");
+                            return true;
+                        }
+                    }
+                    catch (FileNotFoundException err)
+                    {
+                        Console.WriteLine("Can Not readed file");
+                        return false;
+                    }
+                }
+            }
+            catch (FileNotFoundException err)
+            {
+                Console.WriteLine("File Not Exist");
+                return false;
+            }
         }
     }
 
@@ -27,25 +49,51 @@ namespace WindowsFormsApp1
         public fileCreate() { }
 
         public void createNewFile(string ip, string password, string user)
-        {
-            StreamWriter sw = File.CreateText(@"C:\Users\" + Environment.UserName + @"\Documents\DBconfiguration.txt");
-            sw.Close();
-
-            string base64EncodedData = " ip" + ip + "," + " user " + user + "," + " password " + password ;
-
-
-  
-
-
+        {         
             try
             {
 
-
-                File.AppendAllText(@"C:\Users\" + Environment.UserName + @"\Documents\DBconfiguration.txt", tt);
-
-            }catch(IOException e)
+                string configurationDB = ip + ", " + user + ", " + password ;
+                string fileName = "configurationDB.dat";
+                
+                using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                {
+                       using(BinaryWriter w  = new BinaryWriter(fs))
+                        {
+                            w.Write(configurationDB);
+                        }
+                };
+            }
+            catch(IOException e)
             {
                 Console.WriteLine(e);
+            }
+        }
+    }
+
+    class readFile 
+    {
+        string fileName = "configurationDB.dat";
+        public readFile() { }
+
+        public string getInformationFromFile()
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                {
+                    using (BinaryReader r = new BinaryReader(fs))
+                    {
+
+                        string data = r.ReadString();
+
+                        return data;
+                    }
+                }
+            }
+            catch (FileNotFoundException err)
+            {
+                return "ERR";
             }
         }
     }

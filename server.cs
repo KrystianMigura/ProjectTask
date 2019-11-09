@@ -9,18 +9,29 @@ namespace WindowsFormsApp1
 {
     class server
     {
+
         public server() { }
+
+        public string serv;
+
+        public string Serv
+        {
+            get { return serv;  }
+            set { serv = Serv; }
+        }
 
         public void test()
         {
             try
             {
-                string databaseName = "mysql";
+                string databaseName = "Users";
                 string connstring = string.Format("Server=localhost; database={0}; UID=root; password=TajneHaslo2019!", databaseName);
 
 
                 MySqlConnection CL = new MySqlConnection(connstring);
                 CL.Open();
+                CL.Close();
+                Serv = connstring;
                 Console.WriteLine("connectioin is: " + CL.State.ToString() + " " + Environment.NewLine);
 
             }   

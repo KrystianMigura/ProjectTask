@@ -22,9 +22,12 @@ namespace WindowsFormsApp1
 
                 MySqlConnection CL = new MySqlConnection(connstring);
                 CL.Open();
+               
+                ServerOptions newWindow = new ServerOptions();
+                newWindow.Show();
+
                 return "you are have a connection";
-                Console.WriteLine("connectioin is: " + CL.State.ToString() + " " + Environment.NewLine);
-                
+ 
             }catch(MySqlException err)
             {
                 return "you don't have connection!.";
