@@ -11,8 +11,11 @@ namespace WindowsFormsApp1
     {
         public first_connection() { }
 
+        
+
         public string createConnection(string ip, string password, string user)
         {
+             
 
             try
             {
@@ -31,7 +34,6 @@ namespace WindowsFormsApp1
             }catch(MySqlException err)
             {
                 return "you don't have connection!.";
-                Console.WriteLine(err);
             }
         }
     }

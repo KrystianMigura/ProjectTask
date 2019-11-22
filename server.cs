@@ -7,10 +7,10 @@ using MySql.Data.MySqlClient;
 
 namespace WindowsFormsApp1
 {
-    class server
+    class server1
     {
 
-        public server() { }
+        public server1() { }
 
         public string serv;
 
@@ -24,8 +24,23 @@ namespace WindowsFormsApp1
         {
             try
             {
+                readFile value = new readFile();
+
+                string data = value.getInformationFromFile();
+                readFile getData = new readFile();
+                string Data = getData.getInformationFromFile();
+
+                char[] spearator = { ',' };
+                String[] strlist = Data.Split(spearator);
+
+                string ServerIp = strlist[0];
+                string uid = strlist[1];
+                string password = strlist[2];
+
+
+
                 string databaseName = "Users";
-                string connstring = string.Format("Server=localhost; database={0}; UID=root; password=TajneHaslo2019!", databaseName);
+                string connstring = string.Format("Server="+ServerIp+"; database={0}; UID="+uid+"; password="+password+"", databaseName);
 
 
                 MySqlConnection CL = new MySqlConnection(connstring);

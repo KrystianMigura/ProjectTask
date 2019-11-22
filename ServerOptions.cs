@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
 {
     public partial class ServerOptions : Form
     {
+        
         public ServerOptions()
         {
             InitializeComponent();
@@ -19,12 +20,11 @@ namespace WindowsFormsApp1
 
         private void ServerOptions_Load(object sender, EventArgs e)
         {
+            InsertValueDB insert = new InsertValueDB();
             checkTable getInformationFromDB = new checkTable();
-              
-            getInformationFromDB.getAllTable(listBox1);
+            getInformationFromDB.getAllTable(listBox1, insert);
+            
         }
-
-
-    }
+    }   
 
 }
