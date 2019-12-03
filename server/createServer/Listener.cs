@@ -42,14 +42,14 @@ namespace WindowsFormsApp1.server.createServer
 
                 Socket s = myListener.AcceptSocket();
 
-                //     byte[] b = new byte[100];
-                //     int k = s.Receive(b);
-                //     for(int i=0; i<k; i++)
-                //         Console.Write(Convert.ToChar(b[i]));
+                     byte[] b = new byte[100];
+                     int k = s.Receive(b);
+                     for(int i=0; i<k; i++)
+                         Console.Write(Convert.ToChar(b[i]));
 
-                //     ASCIIEncoding asen = new ASCIIEncoding();
-                //     s.Send(asen.GetBytes("The string was recived by the server."));
-                //     Console.WriteLine("Sent Acknowledgment");
+                     ASCIIEncoding asen = new ASCIIEncoding();
+                     s.Send(asen.GetBytes("The string was recived by the server."));
+                     Console.WriteLine("Sent Acknowledgment");
 
                     s.Close();
                     myListener.Stop();
