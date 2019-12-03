@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="server\allOptions\fileOptions.cs" />
     <Compile Include="server\createServer\first-connection.cs" />
+    <Compile Include="server\createServer\Listener.cs" />
     <Compile Include="server\DB\checkTable.cs">
       <SubType>Form</SubType>
     </Compile>

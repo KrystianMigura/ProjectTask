@@ -9,13 +9,27 @@ using System.Globalization;
 
 namespace WindowsFormsApp1
 {
+    class opt
+    {
+        opt() { }
+
+        private ListBox list { get; set; }
+
+        public void ad(string test)
+        {
+            this.list.Items.Add(test);
+        }
+    }
+
     class checkTable : ServerOptions
     {
-        public ListBox listbox;
+        //public ListBox listbox111;
+
+  
 
         public checkTable() { }
 
-        public void getAllTable(ListBox listBox11, InsertValueDB insert)
+        public void getAllTable(ListBox listbox, InsertValueDB insert)
         {
             readFile getData = new readFile();
             string data = getData.getInformationFromFile();
@@ -26,8 +40,7 @@ namespace WindowsFormsApp1
             string ServerIp = strlist[0];
             string uid = strlist[1];
             string password = strlist[2];
-            insert.insertToTable();
-            listbox = listBox11;
+
 
 
             string databaseName = "Users";
@@ -62,15 +75,18 @@ namespace WindowsFormsApp1
             CL.Open();
             DateTime localDate = DateTime.Now;
             MySqlCommand createTableTaskList = new MySqlCommand(queryTableTask, CL);
+            InsertValueDB DbInsert = new InsertValueDB();
             try
             {
                 createTableTaskList.ExecuteNonQuery();
                
                 listbox.Items.Add( localDate + " Create Table : Table TaskList is Created Correct");
+                DbInsert.insertToTable("info", localDate + "Create Table : Table TaskList is Created Correct");
             }
             catch (MySqlException e)
             {
                 listbox.Items.Add( localDate + " Create Table : Table Logs Exist");
+                DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
             }
 
             MySqlCommand createTableForLog = new MySqlCommand(queryTableLogs, CL);
@@ -78,10 +94,12 @@ namespace WindowsFormsApp1
             {
                 createTableForLog.ExecuteNonQuery();
                 listbox.Items.Add(localDate + " Create Table : Table Logs is Created Correct");
+                DbInsert.insertToTable("info", localDate + "Create Table : Table Logs is Created Correct");
             }
             catch (MySqlException e)
             {
                 listbox.Items.Add(localDate + " Create Table : Table Logs Exist");
+                DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
             }
 
            
@@ -89,15 +107,17 @@ namespace WindowsFormsApp1
             try
             {
                 createTable.ExecuteNonQuery();
-                listbox.Items.Add(localDate + " Create Table : Table user is Created Correct");
+                listbox.Items.Add(localDate + " Create Table : Table user is Created Correct");               
+                DbInsert.insertToTable("info", localDate+"Create Table : Table user is Created Correct");
 
             }
             catch(MySql.Data.MySqlClient.MySqlException error)
             {
  
                 listbox.Items.Add(localDate + " Create Table : Table user exist");
-                // added information to listbox  
-          
+                DbInsert.insertToTable("info", localDate +"Create Table : Table user exist");
+
+
             }
 
         }

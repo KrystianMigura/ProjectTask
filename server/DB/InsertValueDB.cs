@@ -25,13 +25,29 @@ namespace WindowsFormsApp1
             Message = _message;
         }
 
-        public void insertToTable()
+        public void insertToTable(string typeLog, string message)
         {
-            
+            readFile getData = new readFile();
+            string data = getData.getInformationFromFile();
+
+            char[] spearator = { ',' };
+            String[] strlist = data.Split(spearator);
+
+            string ServerIp = strlist[0];
+            string uid = strlist[1];
+            string password = strlist[2];
+
             string databaseName = "Users";
-            string connstring = string.Format("Server=127.0.0.1; database={0}; UID=root; password=TajneHaslo!", databaseName);
+            string connstring = string.Format("Server="+ServerIp+"; database={0}; UID="+uid+ "; password="+password, databaseName);
             MySqlConnection CL = new MySqlConnection(connstring);
             CL.Open();
+ 
+            string insert = "INSERT INTO logs(typeLog,message) VALUES('"+typeLog+"','"+message+"')";
+
+            MySqlCommand cmd = new MySqlCommand(insert,CL);
+            cmd.ExecuteNonQuery();
+            CL.Close();
+      
         }
 
 

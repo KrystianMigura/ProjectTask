@@ -27,6 +27,9 @@ namespace WindowsFormsApp1
                 CL.Open();
                
                 ServerOptions newWindow = new ServerOptions();
+                InsertValueDB log = new InsertValueDB();
+                DateTime localDate = DateTime.Now;
+                log.insertToTable("info", localDate+" Server is started!");
                 newWindow.Show();
 
                 return "you are have a connection";

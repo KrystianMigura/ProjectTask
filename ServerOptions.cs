@@ -23,7 +23,17 @@ namespace WindowsFormsApp1
             InsertValueDB insert = new InsertValueDB();
             checkTable getInformationFromDB = new checkTable();
             getInformationFromDB.getAllTable(listBox1, insert);
+            //server.createServer.Listener listen = new server.createServer.Listener();
+            //listen.go();
+            server.createServer.thr test = new server.createServer.thr();
+            test.setThread();
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+ 
+ 
         }
     }   
 
