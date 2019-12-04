@@ -36,6 +36,9 @@
     <Reference Include="MySql.Data">
       <HintPath>server\MySql.Data.DLL</HintPath>
     </Reference>
+    <Reference Include="NetworkCommsDotNetComplete">
+      <HintPath>..\..\..\..\..\Desktop\NetworkCommsDotNetComplete.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

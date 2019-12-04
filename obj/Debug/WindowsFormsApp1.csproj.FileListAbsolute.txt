@@ -43,3 +43,4 @@ C:\Users\Krystian\source\repos\WindowsFormsApp1\WindowsFormsApp1\ProjectTask\obj
 C:\Users\Krystian\source\repos\WindowsFormsApp1\WindowsFormsApp1\ProjectTask\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\Krystian\source\repos\WindowsFormsApp1\WindowsFormsApp1\ProjectTask\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Krystian\source\repos\WindowsFormsApp1\WindowsFormsApp1\ProjectTask\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Krystian\source\repos\WindowsFormsApp1\WindowsFormsApp1\ProjectTask\bin\Debug\NetworkCommsDotNetComplete.dll
