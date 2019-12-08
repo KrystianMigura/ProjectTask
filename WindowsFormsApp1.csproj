@@ -67,6 +67,7 @@
     <Compile Include="ServerOptions.Designer.cs">
       <DependentUpon>ServerOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="server\allOptions\CmpMessageFromClient.cs" />
     <Compile Include="server\allOptions\fileOptions.cs" />
     <Compile Include="server\createServer\first-connection.cs" />
     <Compile Include="server\createServer\Listener.cs" />

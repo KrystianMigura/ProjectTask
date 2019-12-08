@@ -85,7 +85,12 @@ namespace WindowsFormsApp1.server.createServer
             {
                 // Translate data bytes to a ASCII string.
                 data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                Console.WriteLine("Received: {0}", data);
+                Console.WriteLine("Received: {0}", data );
+                //data value from client
+                server.allOptions.CmpMessageFromClient cmp = new server.allOptions.CmpMessageFromClient();
+                cmp.splitMessage(data);
+
+                //t.test add information do listbox and next should add info to DB;
                 t.test((ListBox)listbox, data);
                 // Process the data sent by the client.
                 data = "to jest odpowiedz z servera do klienta wazne!!";
