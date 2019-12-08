@@ -6,31 +6,68 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms;
 
 
 namespace WindowsFormsApp1.server.createServer
 {
-    public class thr
-    {
-        public thr() { }
+    public class obj : ServerOptions {
+        public obj() { }
+        public ListBox a { get; set; }
+        public string dupa { get; set; }
 
-        public void setThread()
+        public void test(ListBox list, string text)
         {
+            Console.WriteLine(list);
+            try
+            {
+                list.Items.Add(text);
+            }catch(Exception aaa)
+            {
+                Console.WriteLine(aaa);
+            }
+            }
+
+    }
+    public class thr : obj
+    {
+        
+        public thr() { }
+        public ListBox list { get; set; }
+        public string text { get; set; }
+        
+        public void setThread(ListBox listBox)
+        {
+
+
             Listener works = new Listener();
 
+      //      listbox.Items.Add("asdfasdfasdf");
+//mozliwe dodanie do listy
             Thread createSecondThread = new Thread(works.go);
-            createSecondThread.Start();
+            createSecondThread.Start(listBox);
+        }
+
+        protected void addVal()
+        {
+
+            
+
         }
     }
 
-    public class Listener
+    public class Listener : ServerOptions
     {
         public Listener() { }
+        public delegate void delegateset(string a);
+       
 
-
-
-        public void go()
+        public void go(Object listbox)
         {
+            string text = "";
+            obj t = new obj();
+            
+
             IPAddress ipA = IPAddress.Parse("127.0.0.1");
             TcpListener myList = new TcpListener(ipA, 10000);
             myList.Start();
@@ -48,11 +85,16 @@ namespace WindowsFormsApp1.server.createServer
             {
                 // Translate data bytes to a ASCII string.
                 data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                Console.WriteLine("Received: {0}", data);
+                Console.WriteLine("Received: {0}", data );
+                //data value from client
+                server.allOptions.CmpMessageFromClient cmp = new server.allOptions.CmpMessageFromClient();
+                cmp.splitMessage(data);
 
+                //t.test add information do listbox and next should add info to DB;
+                t.test((ListBox)listbox, data);
                 // Process the data sent by the client.
                 data = "to jest odpowiedz z servera do klienta wazne!!";
-
+                
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                 // Send back a response.
