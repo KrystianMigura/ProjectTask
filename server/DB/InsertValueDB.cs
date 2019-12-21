@@ -50,6 +50,31 @@ namespace WindowsFormsApp1
       
         }
 
+        public void registerUser(string nick, string pass)
+        {
+            readFile getData = new readFile();
+            string data = getData.getInformationFromFile();
+
+            char[] spearator = { ',' };
+            String[] strlist = data.Split(spearator);
+
+            string ServerIp = strlist[0];
+            string uid = strlist[1];
+            string password = strlist[2];
+
+            string databaseName = "Users";
+
+            string connstring = string.Format("Server=" + ServerIp + "; database={0}; UID=" + uid + "; password=" + password, databaseName);
+            MySqlConnection CL = new MySqlConnection(connstring);
+            CL.Open();
+
+            string insert = "INSERT INTO users( nick, firstName, lastName, password, email) VALUES('"+nick+"','','','"+pass+"','e')";
+
+            MySqlCommand cmd = new MySqlCommand(insert, CL);
+            cmd.ExecuteNonQuery();
+            CL.Close();
+        }
+
 
     }
 }
