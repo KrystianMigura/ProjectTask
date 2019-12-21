@@ -22,28 +22,28 @@ namespace WindowsFormsApp1.server.createServer
             try
             {
                 list.Items.Add(text);
-            }catch(Exception aaa)
+            } catch (Exception aaa)
             {
                 Console.WriteLine(aaa);
             }
-            }
+        }
 
     }
     public class thr : obj
     {
-        
+
         public thr() { }
         public ListBox list { get; set; }
         public string text { get; set; }
-        
+
         public void setThread(ListBox listBox)
         {
 
 
             Listener works = new Listener();
 
-      //      listbox.Items.Add("asdfasdfasdf");
-//mozliwe dodanie do listy
+            //      listbox.Items.Add("asdfasdfasdf");
+            //mozliwe dodanie do listy
             Thread createSecondThread = new Thread(works.go);
             createSecondThread.Start(listBox);
         }
@@ -51,9 +51,72 @@ namespace WindowsFormsApp1.server.createServer
         protected void addVal()
         {
 
-            
+
 
         }
+    }
+
+    public class HandleClient{
+        
+        public HandleClient() { }
+        TcpClient clientsocket;
+
+        public void StartClient(TcpClient inClientSocket, Object listbox)
+        {
+            this.clientsocket = inClientSocket;
+            Thread ctThread = new Thread(DoChat);
+            ctThread.Start(listbox);
+        }
+        public void DoChat(Object listbox)
+        {
+            obj t = new obj();
+            InsertValueDB log = new InsertValueDB();
+            Byte[] bytes = new byte[256];
+            String data = null;
+            Console.WriteLine("server start o port 10000");
+            //TcpClient client = myList.AcceptTcpClient();
+            // new Thread(() => HandleClient(client)).Start();
+            //TcpClient client = myList.AcceptTcpClient();
+            Console.WriteLine("Connected!");
+
+            NetworkStream stream = clientsocket.GetStream();
+
+            int i;
+
+            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+            {
+                // Translate data bytes to a ASCII string.
+                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                Console.WriteLine("Received: {0}", data);
+                //data value from client
+                server.allOptions.CmpMessageFromClient cmp = new server.allOptions.CmpMessageFromClient();
+                cmp.splitMessage(data);
+
+                //t.test add information do listbox and next should add info to DB;
+                t.test((ListBox)listbox, data);
+
+
+
+                DateTime localDate = DateTime.Now;
+                log.insertToTable("info", data);
+
+                // Process the data sent by the client.
+                data = "to jest odpowiedz z servera do klienta wazne!!";
+
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+
+                // Send back a response.
+                stream.Write(msg, 0, msg.Length);
+                Console.WriteLine("Sent: {0}", data);
+
+                if (data == "500")
+                {
+                    clientsocket.Close();
+                }
+
+            }
+        }
+
     }
 
     public class Listener : ServerOptions
@@ -66,44 +129,72 @@ namespace WindowsFormsApp1.server.createServer
         {
             string text = "";
             obj t = new obj();
-            
+            InsertValueDB log = new InsertValueDB();
 
             IPAddress ipA = IPAddress.Parse("127.0.0.1");
             TcpListener myList = new TcpListener(ipA, 10000);
+
+            TcpClient Client = default(TcpClient);
+            int count = 0;
             myList.Start();
-            Byte[] bytes = new byte[256];
-            String data = null;
-            Console.WriteLine("server start o port 10000");
-            TcpClient client = myList.AcceptTcpClient();
-            Console.WriteLine("Connected!");
 
-            NetworkStream stream = client.GetStream();
-
-            int i;
-
-            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+            while (true)
             {
-                // Translate data bytes to a ASCII string.
-                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                Console.WriteLine("Received: {0}", data );
-                //data value from client
-                server.allOptions.CmpMessageFromClient cmp = new server.allOptions.CmpMessageFromClient();
-                cmp.splitMessage(data);
-
-                //t.test add information do listbox and next should add info to DB;
-                t.test((ListBox)listbox, data);
-                // Process the data sent by the client.
-                data = "to jest odpowiedz z servera do klienta wazne!!";
-                
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-
-                // Send back a response.
-                stream.Write(msg, 0, msg.Length);
-                Console.WriteLine("Sent: {0}", data);
+                count += 1;
+                Client = myList.AcceptTcpClient();
+                HandleClient handle = new HandleClient();
+                handle.StartClient(Client, listbox);
             }
 
+
+            /*
+                        Byte[] bytes = new byte[256];
+                        String data = null;
+                        Console.WriteLine("server start o port 10000");
+                        TcpClient client = myList.AcceptTcpClient();
+                       // new Thread(() => HandleClient(client)).Start();
+                        //TcpClient client = myList.AcceptTcpClient();
+                        Console.WriteLine("Connected!");
+
+                        NetworkStream stream = client.GetStream();
+
+                        int i;
+
+                        while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                        {
+                            // Translate data bytes to a ASCII string.
+                            data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                            Console.WriteLine("Received: {0}", data );
+                            //data value from client
+                            server.allOptions.CmpMessageFromClient cmp = new server.allOptions.CmpMessageFromClient();
+                            cmp.splitMessage(data);
+
+                            //t.test add information do listbox and next should add info to DB;
+                            t.test((ListBox)listbox, data);
+
+
+
+                            DateTime localDate = DateTime.Now;
+                            log.insertToTable("info", data);
+
+                            // Process the data sent by the client.
+                            data = "to jest odpowiedz z servera do klienta wazne!!";
+
+                            byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+
+                            // Send back a response.
+                            stream.Write(msg, 0, msg.Length);
+                            Console.WriteLine("Sent: {0}", data);
+
+                            if (data == "500")
+                            {
+                                client.Close();
+                            }
+
+                        }
+                         */
             // Shutdown and end connection
-            client.Close();
+
 
 
         }

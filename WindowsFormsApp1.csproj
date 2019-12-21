@@ -70,10 +70,10 @@
     <Compile Include="server\allOptions\CmpMessageFromClient.cs" />
     <Compile Include="server\allOptions\fileOptions.cs" />
     <Compile Include="server\createServer\first-connection.cs" />
-    <Compile Include="server\createServer\Listener.cs" />
-    <Compile Include="server\DB\checkTable.cs">
+    <Compile Include="server\createServer\Listener.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="server\DB\checkTable.cs" />
     <Compile Include="server\DB\InsertValueDB.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
