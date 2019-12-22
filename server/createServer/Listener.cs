@@ -87,7 +87,30 @@ namespace WindowsFormsApp1.server.createServer
                     {
                         case 100: codeService.code100(strList[1]);
                             break;
-                        case 101: codeService.code101();
+                        case 101: 
+                            
+                            Boolean flag = codeService.code101(strList[1]);
+                                if(flag == true)
+                            {
+                                var data101 = "200";
+
+                                byte[] msg101 = System.Text.Encoding.ASCII.GetBytes(data101);
+
+                                // Send back a response.
+                                stream.Write(msg101, 0, msg101.Length);
+                                Console.WriteLine("Sent: {0}", data101);
+                            }
+                            else
+                            {
+                               var data101not = "404";
+
+                                byte[] msg101 = System.Text.Encoding.ASCII.GetBytes(data101not);
+
+                                // Send back a response.
+                                stream.Write(msg101, 0, msg101.Length);
+                                Console.WriteLine("Sent: {0}", data101not);
+                            }
+
                             break;
                         case 102: codeService.code102();
                             break;

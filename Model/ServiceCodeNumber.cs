@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1.Model
 {
@@ -31,13 +32,44 @@ namespace WindowsFormsApp1.Model
             string lastName = list[2];
             string password = list[3];
             string email = list[4];
-
+                       
             InsertValueDB add = new InsertValueDB();
-            add.registerUser(nick, firstName, lastName, password, email);
+            Boolean status;
+            //check exist email in DB;
+            status = add.findEmail(email);
+            
+            if(status == true)
+            {
+                add.registerUser(nick, firstName, lastName, password, email);
+            }
+            else
+            {
+                MessageBox.Show("This email exist in data base. Please input another email.","Problem in email address",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            
         }
-        public void code101()
+        public Boolean code101(String data)
         {
+            Boolean flag = false;
             //login
+            Model.ConverterBase64 convert = new Model.ConverterBase64();
+            data = convert.decodeBase64string(data);
+            String[] list = spliter(data);
+
+            InsertValueDB askDB = new InsertValueDB();
+
+            flag = askDB.loginToApp(list[0], list[1]);
+            Console.WriteLine(flag + " info dot logowania");
+
+            if(flag == false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         public void code102()
         {

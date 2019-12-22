@@ -53,6 +53,7 @@ namespace WindowsFormsApp1
                                 `lastName` text NOT NULL,
                                 `password` text NOT NULL,
                                 `email` text NOT NULL,
+                                `access` text NOT NULL,
                                 PRIMARY KEY (`sid`))
                                 ENGINE = MyISAM AUTO_INCREMENT = 1 ;", "Users");
 
@@ -113,7 +114,7 @@ namespace WindowsFormsApp1
             }
             catch(MySql.Data.MySqlClient.MySqlException error)
             {
- 
+                Console.WriteLine(error);
                 listbox.Items.Add(localDate + " Create Table : Table user exist");
                 DbInsert.insertToTable("info", localDate +"Create Table : Table user exist");
 
