@@ -26,7 +26,7 @@ namespace WindowsFormsApp1.server.allOptions
             }
 
             InsertValueDB add = new InsertValueDB();
-            add.registerUser("adam","burel");
+
             Console.WriteLine(dataInfo);
         }
 

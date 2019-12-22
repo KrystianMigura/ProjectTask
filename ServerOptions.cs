@@ -16,15 +16,7 @@ namespace WindowsFormsApp1
     {
         public static ListBox hmmm { get; set; }
 
-        public void x(string asdf, ListBox list)
-        {
-            
-            
-            Console.WriteLine(asdf); // wiadomosc z listenera
-            Console.WriteLine(hmmm);
-            list.Items.Add("AAAAAAAAAAAA");
-           
-        }
+
 
         public ServerOptions()
         {
@@ -47,12 +39,6 @@ namespace WindowsFormsApp1
             server.createServer.thr test = new server.createServer.thr();
             test.setThread(listBox1);
             
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
- 
- 
         }
     }   
 
