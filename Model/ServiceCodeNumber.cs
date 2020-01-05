@@ -19,8 +19,9 @@ namespace WindowsFormsApp1.Model
             return strList;
         }
 
-        public void code100(String data)
+        public Boolean code100(String data)
         {
+            Console.WriteLine("TO JKEST TEST + " + data);
             //register
             //data is base64 need convert
             Model.ConverterBase64 convert = new Model.ConverterBase64();
@@ -41,10 +42,11 @@ namespace WindowsFormsApp1.Model
             if(status == true)
             {
                 add.registerUser(nick, firstName, lastName, password, email);
+                return true;
             }
             else
             {
-                MessageBox.Show("This email exist in data base. Please input another email.","Problem in email address",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             
             
