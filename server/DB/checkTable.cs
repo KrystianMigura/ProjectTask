@@ -68,6 +68,7 @@ namespace WindowsFormsApp1
                                 `resolver` text NOT NULL,
                                 `titleTask` text NOT NULL,
                                 `created` text NOT NULL,
+                                `information` text NOT NULL,
                                 `dateCreated` date NOT NULL,
                                 `dateResolved` date NOT NULL,
                                 PRIMARy KEY (`id`)) ENGINE = MyISAM AUTO_INCREMENT = 1", "TaskList");

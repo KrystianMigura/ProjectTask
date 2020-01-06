@@ -81,8 +81,12 @@ namespace WindowsFormsApp1.Model
         {
             //update task
         }
-        public void code104()
+        public String code104()
         {
+            InsertValueDB selectQuery = new InsertValueDB();
+
+            String paramToSend = selectQuery.selectAllTask();
+            return paramToSend;
             //get all task
         }
         public void code105()

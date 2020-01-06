@@ -74,6 +74,55 @@ namespace WindowsFormsApp1
             CL.Close();
         }
 
+        public string selectAllTask()
+        {
+            readFile getData = new readFile();
+            string data = getData.getInformationFromFile();
+
+            char[] spearator = { ',' };
+            String[] strlist = data.Split(spearator);
+
+            string ServerIp = strlist[0];
+            string uid = strlist[1];
+            string password = strlist[2];
+            string databaseName = "Users";
+
+            string connstring = string.Format("Server=" + ServerIp + "; database={0}; UID=" + uid + ";convert zero datetime=true; ; password=" + password, databaseName);
+            MySqlConnection CL = new MySqlConnection(connstring);
+            CL.Open();
+
+
+            string queryAll = "SELECT * FROM tasklist";
+            MySqlCommand cmd = new MySqlCommand(queryAll, CL);
+
+            var version = cmd.ExecuteScalar().ToString();
+            MySqlDataReader myDataReader;
+            myDataReader = cmd.ExecuteReader();
+
+            string x= "";
+
+            int i = 0;
+            while (myDataReader.Read())
+            {
+                string a = "\"" +myDataReader.GetString(0)+"\"";
+                string b = "\"" + myDataReader.GetString(1) + "\"";
+                string c = "\"" + myDataReader.GetString(2) + "\"";
+                string d = "\"" + myDataReader.GetString(3) + "\"";
+                var e = "\"" + myDataReader.GetValue(4) + "\"";
+                var f = "\"" + myDataReader.GetValue(5) + "\"";
+                var g = "\"" + myDataReader.GetValue(6) + "\"";
+
+                x += " { id  : " + ""+ a +""+ ",  resolver  :" +""+ b +""+ ", titleTask : " +""+ c +""+ " , created : " +""+ d +""+ ", information : " +""+ e +""+ ", dateCreated: " +""+ f +""+ ", dateResolved : " +""+ g + ""+ " },";
+   
+                
+                i++;
+            
+                
+            }
+            return x;
+
+        }
+
         public Boolean loginToApp (string email, string passwd)
         {
             readFile getData = new readFile();

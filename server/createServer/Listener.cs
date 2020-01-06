@@ -149,7 +149,20 @@ namespace WindowsFormsApp1.server.createServer
                             break;
                         case 103: codeService.code103();
                             break;
-                        case 104: codeService.code104();
+                        case 104: 
+                            String paramForSend = codeService.code104();
+                            Model.ConverterBase64 con = new Model.ConverterBase64();
+                            
+                            string coder = con.encodeBase64string(paramForSend);
+
+                            // var data104not = "114";
+
+                            byte[] msg104 = System.Text.Encoding.ASCII.GetBytes("114~"+ coder);
+
+                            // Send back a response.
+                            stream.Write(msg104, 0, msg104.Length);
+                        //    Console.WriteLine("Sent: {0}", data104not);
+
                             break;
                         case 105: codeService.code105();
                             break;
