@@ -71,6 +71,7 @@ namespace WindowsFormsApp1
                                 `information` text NOT NULL,
                                 `dateCreated` date NOT NULL,
                                 `dateResolved` date NOT NULL,
+                                `status` text NOT NULL,
                                 PRIMARy KEY (`id`)) ENGINE = MyISAM AUTO_INCREMENT = 1", "TaskList");
 
             MySqlConnection CL = new MySqlConnection(connstring);

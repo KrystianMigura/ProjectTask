@@ -111,8 +111,9 @@ namespace WindowsFormsApp1
                 var e = "\"" + myDataReader.GetValue(4) + "\"";
                 var f = "\"" + myDataReader.GetValue(5) + "\"";
                 var g = "\"" + myDataReader.GetValue(6) + "\"";
+                string h = "\"" + myDataReader.GetValue(7) + "\"";
 
-                x += " { id  : " + ""+ a +""+ ",  resolver  :" +""+ b +""+ ", titleTask : " +""+ c +""+ " , created : " +""+ d +""+ ", information : " +""+ e +""+ ", dateCreated: " +""+ f +""+ ", dateResolved : " +""+ g + ""+ " },";
+                x += " { id  : " + ""+ a +""+ ",  resolver  :" +""+ b +""+ ", titleTask : " +""+ c +""+ " , created : " +""+ d +""+ ", information : " +""+ e +""+ ", dateCreated: " +""+ f +""+ ", dateResolved : " +""+ g + ""+ ", status : " + "" + h + " },";
    
                 
                 i++;
