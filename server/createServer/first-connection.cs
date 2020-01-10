@@ -25,12 +25,16 @@ namespace WindowsFormsApp1
 
                 MySqlConnection CL = new MySqlConnection(connstring);
                 CL.Open();
+
+                //here should be add table to db
+
                
                 ServerOptions newWindow = new ServerOptions();
-                InsertValueDB log = new InsertValueDB();
-                DateTime localDate = DateTime.Now;
-                log.insertToTable("info", localDate+" Server is started!");
                 newWindow.Show();
+               // InsertValueDB log = new InsertValueDB();
+                DateTime localDate = DateTime.Now;
+             //   log.insertToTable("info", localDate+" Server is started!");
+                
 
                 return "you are have a connection";
  

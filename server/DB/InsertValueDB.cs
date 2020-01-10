@@ -74,6 +74,90 @@ namespace WindowsFormsApp1
             CL.Close();
         }
 
+        public string selectMyTask()
+        {
+            readFile getData = new readFile();
+            string data = getData.getInformationFromFile();
+
+            char[] spearator = { ',' };
+            String[] strlist = data.Split(spearator);
+
+            string ServerIp = strlist[0];
+            string uid = strlist[1];
+            string password = strlist[2];
+            string databaseName = "Users";
+
+            string connstring = string.Format("Server=" + ServerIp + "; database={0}; UID=" + uid + ";convert zero datetime=true; ; password=" + password, databaseName);
+            MySqlConnection CL = new MySqlConnection(connstring);
+            CL.Open();
+
+
+            string queryAll = "SELECT * FROM tasklist where resolver='nneo17@gmail.com'";
+            MySqlCommand cmd = new MySqlCommand(queryAll, CL);
+
+            var version = cmd.ExecuteScalar().ToString();
+            MySqlDataReader myDataReader;
+            myDataReader = cmd.ExecuteReader();
+
+            string x = "";
+
+            int i = 0;
+            while (myDataReader.Read())
+            {
+                string a = "\"" + myDataReader.GetString(0) + "\"";
+                string b = "\"" + myDataReader.GetString(1) + "\"";
+                string c = "\"" + myDataReader.GetString(2) + "\"";
+                string d = "\"" + myDataReader.GetString(3) + "\"";
+                var e = "\"" + myDataReader.GetValue(4) + "\"";
+                var f = "\"" + myDataReader.GetValue(5) + "\"";
+                var g = "\"" + myDataReader.GetValue(6) + "\"";
+                string h = "\"" + myDataReader.GetValue(7) + "\"";
+
+                x += " { id  : " + "" + a + "" + ",  resolver  :" + "" + b + "" + ", titleTask : " + "" + c + "" + " , created : " + "" + d + "" + ", information : " + "" + e + "" + ", dateCreated: " + "" + f + "" + ", dateResolved : " + "" + g + "" + ", status : " + "" + h + " },";
+
+
+                i++;
+
+
+            }
+            return x;
+        }
+
+        public string insertTask(String email, String date, String resolver, String title, String information, String status)
+        {
+            readFile getData = new readFile();
+            string data = getData.getInformationFromFile();
+
+            char[] spearator = { ',' };
+            String[] strlist = data.Split(spearator);
+
+            string ServerIp = strlist[0];
+            string uid = strlist[1];
+            string password = strlist[2];
+            string databaseName = "Users";
+
+            string connstring = string.Format("Server=" + ServerIp + "; database={0}; UID=" + uid + ";convert zero datetime=true; ; password=" + password, databaseName);
+            MySqlConnection CL = new MySqlConnection(connstring);
+            CL.Open();
+
+            String nowDate = DateTime.Now.ToString();
+            nowDate = nowDate.Remove(11);
+            char[] separate = { '.' };
+            String[] dateArr = nowDate.Split(separate);
+
+            nowDate = dateArr[2]+"-"+dateArr[1]+"-"+ dateArr[0];
+            nowDate = nowDate.Remove(4, 1);
+
+            string queryAll = "INSERT INTO `users`.`tasklist` (`id`, `resolver`, `titleTask`, `created`, `information`, `dateCreated`, `dateResolved`, `status`) VALUES (NULL,'"+status+"', '"+information+"','"+email+"','"+title+"','"+nowDate+ "',NULL,'"+resolver+"');";
+                MySqlCommand cmd = new MySqlCommand(queryAll, CL);
+          
+
+            var version = cmd.ExecuteScalar().ToString();
+
+            
+            return "";
+        }
+
         public string selectAllTask()
         {
             readFile getData = new readFile();

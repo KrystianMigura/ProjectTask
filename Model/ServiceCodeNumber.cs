@@ -73,8 +73,13 @@ namespace WindowsFormsApp1.Model
                 return true;
             }
         }
-        public void code102()
+        public void code102(String email, String date, String resolver, String title, String information, String status)
         {
+
+            InsertValueDB selectQuery = new InsertValueDB();
+
+            String paramToSend = selectQuery.insertTask(email, date, resolver, title, information, status);
+
             //add task
         }
         public void code103()
@@ -93,8 +98,14 @@ namespace WindowsFormsApp1.Model
         {
             //update user
         }
-        public void code106()
+        public String code106()
         {
+            Console.WriteLine("TEST 106 only my task!!");
+
+            InsertValueDB selectQuery = new InsertValueDB();
+
+            String paramToSend = selectQuery.selectMyTask();
+            return paramToSend;
             //get my task
         }
         public void code500()

@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
 
         public checkTable() { }
 
-        public void getAllTable(ListBox listbox, InsertValueDB insert)
+        public void getAllTable(ListBox listbox)
         {
             readFile getData = new readFile();
             string data = getData.getInformationFromFile();
@@ -70,7 +70,7 @@ namespace WindowsFormsApp1
                                 `created` text NOT NULL,
                                 `information` text NOT NULL,
                                 `dateCreated` date NOT NULL,
-                                `dateResolved` date NOT NULL,
+                                `dateResolved` date ,
                                 `status` text NOT NULL,
                                 PRIMARy KEY (`id`)) ENGINE = MyISAM AUTO_INCREMENT = 1", "TaskList");
 
@@ -79,18 +79,6 @@ namespace WindowsFormsApp1
             DateTime localDate = DateTime.Now;
             MySqlCommand createTableTaskList = new MySqlCommand(queryTableTask, CL);
             InsertValueDB DbInsert = new InsertValueDB();
-            try
-            {
-                createTableTaskList.ExecuteNonQuery();
-               
-                listbox.Items.Add( localDate + " Create Table : Table TaskList is Created Correct");
-                DbInsert.insertToTable("info", localDate + "Create Table : Table TaskList is Created Correct");
-            }
-            catch (MySqlException e)
-            {
-                listbox.Items.Add( localDate + " Create Table : Table Logs Exist");
-                DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
-            }
 
             MySqlCommand createTableForLog = new MySqlCommand(queryTableLogs, CL);
             try
@@ -104,6 +92,22 @@ namespace WindowsFormsApp1
                 listbox.Items.Add(localDate + " Create Table : Table Logs Exist");
                 DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
             }
+
+
+            try
+            {
+                createTableTaskList.ExecuteNonQuery();
+               
+                listbox.Items.Add( localDate + " Create Table : Table TaskList is Created Correct");
+                DbInsert.insertToTable("info", localDate + "Create Table : Table TaskList is Created Correct");
+            }
+            catch (MySqlException e)
+            {
+                listbox.Items.Add( localDate + " Create Table : Table Logs Exist");
+                DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
+            }
+
+
 
            
             MySqlCommand createTable = new MySqlCommand(quetyTable, CL);

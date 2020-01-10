@@ -23,6 +23,7 @@ namespace WindowsFormsApp1
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             hmmm = listBox1;
+
         }
         
 
@@ -31,7 +32,7 @@ namespace WindowsFormsApp1
 
             InsertValueDB insert = new InsertValueDB();
             checkTable getInformationFromDB = new checkTable();
-            getInformationFromDB.getAllTable(listBox1, insert);
+            getInformationFromDB.getAllTable(listBox1);
            
    
             //server.createServer.Listener listen = new server.createServer.Listener();
