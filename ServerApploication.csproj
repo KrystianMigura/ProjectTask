@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="Model\ConverterBase64.cs" />
     <Compile Include="Model\ServiceCodeNumber.cs" />
-    <Compile Include="server.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

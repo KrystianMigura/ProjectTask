@@ -23,9 +23,6 @@ namespace WindowsFormsApp1
 
     class checkTable : ServerOptions
     {
-        //public ListBox listbox111;
-
-  
 
         public checkTable() { }
 
@@ -40,8 +37,6 @@ namespace WindowsFormsApp1
             string ServerIp = strlist[0];
             string uid = strlist[1];
             string password = strlist[2];
-
-
 
             string databaseName = "Users";
             string connstring = string.Format("Server="+ServerIp+"; database={0}; UID="+uid+"; password="+password+"", databaseName);
@@ -93,7 +88,6 @@ namespace WindowsFormsApp1
                 DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
             }
 
-
             try
             {
                 createTableTaskList.ExecuteNonQuery();
@@ -106,10 +100,7 @@ namespace WindowsFormsApp1
                 listbox.Items.Add( localDate + " Create Table : Table Logs Exist");
                 DbInsert.insertToTable("info", localDate + "Create Table : Table Logs Exist");
             }
-
-
-
-           
+          
             MySqlCommand createTable = new MySqlCommand(quetyTable, CL);
             try
             {
@@ -123,7 +114,6 @@ namespace WindowsFormsApp1
                 Console.WriteLine(error);
                 listbox.Items.Add(localDate + " Create Table : Table user exist");
                 DbInsert.insertToTable("info", localDate +"Create Table : Table user exist");
-
 
             }
 

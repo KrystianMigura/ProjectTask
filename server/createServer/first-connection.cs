@@ -10,13 +10,10 @@ namespace WindowsFormsApp1
     class first_connection
     {
         public first_connection() { }
-
-        
-
+      
         public string createConnection(string ip, string password, string user)
         {
              
-
             try
             {
                 
@@ -25,17 +22,11 @@ namespace WindowsFormsApp1
 
                 MySqlConnection CL = new MySqlConnection(connstring);
                 CL.Open();
-
-                //here should be add table to db
-
-               
+              
                 ServerOptions newWindow = new ServerOptions();
                 newWindow.Show();
-               // InsertValueDB log = new InsertValueDB();
                 DateTime localDate = DateTime.Now;
-             //   log.insertToTable("info", localDate+" Server is started!");
                 
-
                 return "you are have a connection";
  
             }catch(MySqlException err)

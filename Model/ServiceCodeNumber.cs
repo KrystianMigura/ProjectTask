@@ -21,9 +21,6 @@ namespace WindowsFormsApp1.Model
 
         public Boolean code100(String data)
         {
-            Console.WriteLine("TO JKEST TEST + " + data);
-            //register
-            //data is base64 need convert
             Model.ConverterBase64 convert = new Model.ConverterBase64();
             data = convert.decodeBase64string(data);
             String[] list = spliter(data);
@@ -98,13 +95,11 @@ namespace WindowsFormsApp1.Model
         {
             //update user
         }
-        public String code106()
+        public String code106(String email)
         {
-            Console.WriteLine("TEST 106 only my task!!");
-
             InsertValueDB selectQuery = new InsertValueDB();
 
-            String paramToSend = selectQuery.selectMyTask();
+            String paramToSend = selectQuery.selectMyTask(email);
             return paramToSend;
             //get my task
         }

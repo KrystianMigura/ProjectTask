@@ -74,7 +74,7 @@ namespace WindowsFormsApp1
             CL.Close();
         }
 
-        public string selectMyTask()
+        public string selectMyTask(String email)
         {
             readFile getData = new readFile();
             string data = getData.getInformationFromFile();
@@ -92,7 +92,7 @@ namespace WindowsFormsApp1
             CL.Open();
 
 
-            string queryAll = "SELECT * FROM tasklist where resolver='nneo17@gmail.com'";
+            string queryAll = "SELECT * FROM tasklist where resolver='"+email+"'";
             MySqlCommand cmd = new MySqlCommand(queryAll, CL);
 
             var version = cmd.ExecuteScalar().ToString();
@@ -115,10 +115,7 @@ namespace WindowsFormsApp1
 
                 x += " { id  : " + "" + a + "" + ",  resolver  :" + "" + b + "" + ", titleTask : " + "" + c + "" + " , created : " + "" + d + "" + ", information : " + "" + e + "" + ", dateCreated: " + "" + f + "" + ", dateResolved : " + "" + g + "" + ", status : " + "" + h + " },";
 
-
                 i++;
-
-
             }
             return x;
         }

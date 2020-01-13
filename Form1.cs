@@ -78,9 +78,7 @@ namespace WindowsFormsApp1
             if(informationFromConnector == "you are have a connection")
             {
                 Hide();
-            }
-
-      
+            }     
         }
 
     }
